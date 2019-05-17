@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="icon.ico">
+        <link rel="stylesheet" href="https://use.typekit.net/ifu7ayx.css">
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
+		<meta charset="utf-8" />
+		<title>WeEat</title>
+		<style type="text/css">
+            /* Initialize the font-kit */
+            body {
+                margin: 0;
+                padding:0;
+                font-family: montserrat, sans-serif;
+            }
+            
+            /* Navigation bar */
+            
+            .navigation {
+                overflow: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+                z-index:2;
+            }
+            
+            .navigation a {
+                float: right;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 1em;
+            }
+            
+            .navigation a:hover {
+                background-color: #181919;
+                color: white;
+            }
+            
+            .navigation a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+            
+            .navigation img {
+                max-height: 3em;
+                vertical-align: middle;
+                padding: 0px 16px;
+            }
+            
+            #logo {
+                cursor:pointer;
+            }
+            
+            /* Modal Login Box */
+            
+            .login {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+            }
+            
+            .login-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 400px;
+                height: 475px;
+            }
+            
+            .login-container {
+                padding: 16px;
+            }
+            
+            .login-imagecontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+            
+            img.loginLogo {
+                width: 40%;
+                border-radius: 50%;
+            }
+            
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+                border-radius: 40px;
+                font-family: montserrat, sans-serif;
+            }
+            
+            .close {
+                color: #FF5571;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            
+            .animate {
+                -webkit-animation: animatezoom 0.8s;
+                animation animatezoom 0.8s;
+            }
+            
+            @-webkit-keyframes animatezoom {
+                from {-webkit-transform: scale(0)};
+                to {-webkit-transform: scale(1)};
+            }
+            
+            @keyframes animatezoom {
+                from {transform: scale(0)};
+                to {transform: scale(1S)};
+            }
+            
+            .login-container button {
+                background-color: #35C875;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 57%;
+                border-radius: 40px;
+                font-family: montserrat, sans-serif;
+            }
+            
+            #map { position:absolute; top:0; bottom:0; width:100%; }
+            
+        </style>
+        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
+            authDomain: "weeat-c73e4.firebaseapp.com",
+            databaseURL: "https://weeat-c73e4.firebaseio.com",
+            projectId: "weeat-c73e4",
+            storageBucket: "weeat-c73e4.appspot.com",
+            messagingSenderId: "17474082925"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'>
+            // Go to homepage when the logo is clicked
+            function homepage(){
+                window.location.href = 'index.html';
+            }
+            
+        </script>
+    </head>
+    <body>
+        <!-- Login Modal -->
+        <div id="loginModal" class="login">
+            <!-- The Login Form -->
+            <form class = "login-content animate" action="./action.php">
+                <!-- Container for Login Modal Image -->
+                <div class="login-imagecontainer">
+                    <span class="close" onclick= document.getElementById("loginModal").style.display="none">&times;</span>
+                    <img src="wheat.png" alt="loginLogo" class="loginLogo">
+                </div>
+                <!-- Container for Login Modal Fields -->
+                <div class="login-container">
+                    <!-- Username -->
+                    <center>
+                        <label for="user">
+                            <b>Username</b>
+                        </label>
+                    </center>
+                    <input type="text" placeholder="Username" name="user" required>
+                    <!-- Password -->
+                    <center>
+                        <label for="pass">
+                            <b>Password</b>
+                        </label>
+                    </center>
+                    <input type="password" placeholder="Password" name="pass" required>
+                </div>
+                <!-- Container for Login Modal Buttons and Remember Me -->
+                <div class="login-container">
+                    <button type="submit">Login</button>
+                    <label>
+                        <input type="checkbox" name="remember"> Remember me </input>
+                    </label>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Navigational Bar -->
+        <div class="navigation">
+            <img src = "logo.png" alt = "logo" id ="logo" onclick="homepage()"/>
+            <a href="contact.html">Contact</a>
+            <a href="resources.html">Resources</a>
+            <a href="#login" onclick = document.getElementById("loginModal").style.display="block">Login</a>
+        </div>
+        
+        <!-- Map -->
+        <div id='map'></div>
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
+            
+            var map = new mapboxgl.Map({
+                container: 'map', // container id
+                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+                center: [-120.6612399, 35.300745], // starting position [lng, lat]
+                zoom: 16 // starting zoom
+            });
+        </script>
+    </body>
+</html>
