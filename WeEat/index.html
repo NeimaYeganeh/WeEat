@@ -150,7 +150,30 @@
             #map { position:absolute; top:0; bottom:0; width:100%; }
             
         </style>
-        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+        
+        <!-- Libraries -->
+
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- Firebase Authentication -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+
+        <!--BEGIN - Code for FirebaseUI for Web — Auth.
+
+            REFERENCE - https://github.com/firebase/firebaseui-web#installation
+            SUMMARY - Drop-in auth solution that handles the UI flows for signing in users with 
+            email addresses and passwords, phone numbers, Identity Provider Sign In 
+            including Google, Facebook, GitHub, Twitter, Microsoft, Yahoo, OpenID Connect (OIDC) 
+            providers and SAML providers.It is built on top of Firebase Auth.-->
+
+        <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css" />
+
+        <!--END - Code for FirebaseUI for Web — Auth. -->
+
+
+
         <script>
             // Initialize Firebase
             var config = {
@@ -163,14 +186,22 @@
             };
             firebase.initializeApp(config);
         </script>
+        
+        
+
+
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'>
-            // Go to homepage when the logo is clicked
+            //  Go to homepage when the logo is clicked
             function homepage(){
                 window.location.href = 'index.html';
             }
-            
         </script>
+    
+    
+
     </head>
+    
+    
     <body>
         <!-- Login Modal -->
         <div id="loginModal" class="login">
@@ -228,5 +259,6 @@
                 zoom: 16 // starting zoom
             });
         </script>
+
     </body>
 </html>
