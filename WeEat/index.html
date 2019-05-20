@@ -151,43 +151,7 @@
             
         </style>
         
-        <!-- Libraries -->
-
-        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
-
-        <!-- Firebase Authentication -->
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
-
-        <!--BEGIN - Code for FirebaseUI for Web — Auth.
-
-            REFERENCE - https://github.com/firebase/firebaseui-web#installation
-            SUMMARY - Drop-in auth solution that handles the UI flows for signing in users with 
-            email addresses and passwords, phone numbers, Identity Provider Sign In 
-            including Google, Facebook, GitHub, Twitter, Microsoft, Yahoo, OpenID Connect (OIDC) 
-            providers and SAML providers.It is built on top of Firebase Auth.-->
-
-        <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css" />
-
-        <!--END - Code for FirebaseUI for Web — Auth. -->
-
-
-
-        <script>
-            // Initialize Firebase
-            var config = {
-            apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
-            authDomain: "weeat-c73e4.firebaseapp.com",
-            databaseURL: "https://weeat-c73e4.firebaseio.com",
-            projectId: "weeat-c73e4",
-            storageBucket: "weeat-c73e4.appspot.com",
-            messagingSenderId: "17474082925"
-            };
-            firebase.initializeApp(config);
-        </script>
-        
-        
+       
 
 
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'>
@@ -209,7 +173,7 @@
             <form class = "login-content animate" action="./action.php">
                 <!-- Container for Login Modal Image -->
                 <div class="login-imagecontainer">
-                    <span class="close" onclick= document.getElementById("loginModal").style.display="none">&times;</span>
+                    <span class="close" onclick=document.getElementById("loginModal").style.display="none">&times;</span>
                     <img src="wheat.png" alt="loginLogo" class="loginLogo">
                 </div>
                 <!-- Container for Login Modal Fields -->
@@ -231,7 +195,7 @@
                 </div>
                 <!-- Container for Login Modal Buttons and Remember Me -->
                 <div class="login-container">
-                    <button type="submit">Login</button>
+                    <button onclick="login()" type="submit">Login</button>
                     <label>
                         <input type="checkbox" name="remember"> Remember me </input>
                     </label>
@@ -259,6 +223,44 @@
                 zoom: 16 // starting zoom
             });
         </script>
+        
+        
+        
+        <!-- Libraries -->
 
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- Firebase Authentication -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+
+        <!--BEGIN - Code for FirebaseUI for Web — Auth.
+
+            REFERENCE - https://github.com/firebase/firebaseui-web#installation
+            SUMMARY - Drop-in auth solution that handles the UI flows for signing in users with 
+            email addresses and passwords, phone numbers, Identity Provider Sign In 
+            including Google, Facebook, GitHub, Twitter, Microsoft, Yahoo, OpenID Connect (OIDC) 
+            providers and SAML providers.It is built on top of Firebase Auth.-->
+
+        <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css" />
+        <!--END - Code for FirebaseUI for Web — Auth. -->
+
+        <script>
+            // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
+            authDomain: "weeat-c73e4.firebaseapp.com",
+            databaseURL: "https://weeat-c73e4.firebaseio.com",
+            projectId: "weeat-c73e4",
+            storageBucket: "weeat-c73e4.appspot.com",
+            messagingSenderId: "17474082925",
+            appId: "1:17474082925:web:2ca69241a8edaea7"
+            };
+            firebase.initializeApp(config);
+ 
+        </script>
+                <script src="functions/index.js"></script>
+       
     </body>
 </html>
