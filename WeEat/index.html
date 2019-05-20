@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="index.js"></script>
         <link rel="icon" href="icon.ico">
         <link rel="stylesheet" href="https://use.typekit.net/ifu7ayx.css">
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
-		<meta charset="utf-8" />
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet'>
+		<meta charset="utf-8">
 		<title>WeEat</title>
 		<style type="text/css">
             /* Initialize the font-kit */
@@ -167,6 +168,7 @@
     
     
     <body>
+
         <!-- Login Modal -->
         <div id="loginModal" class="login">
             <!-- The Login Form -->
@@ -184,18 +186,18 @@
                             <b>Username</b>
                         </label>
                     </center>
-                    <input type="text" placeholder="Username" name="user" required>
+                    <input type="text" placeholder="Username" name="user" required id="user">
                     <!-- Password -->
                     <center>
                         <label for="pass">
                             <b>Password</b>
                         </label>
                     </center>
-                    <input type="password" placeholder="Password" name="pass" required>
+                    <input type="password" placeholder="Password" name="pass" required id="pass">
                 </div>
                 <!-- Container for Login Modal Buttons and Remember Me -->
                 <div class="login-container">
-                    <button onclick="login()" type="submit">Login</button>
+                    <button type="submit" onclick="login()">Login</button>
                     <label>
                         <input type="checkbox" name="remember"> Remember me </input>
                     </label>
@@ -205,7 +207,7 @@
         
         <!-- Navigational Bar -->
         <div class="navigation">
-            <img src = "logo.png" alt = "logo" id ="logo" onclick="homepage()"/>
+            <img src = "logo.png" alt = "logo" id ="logo" onclick="homepage()">
             <a href="contact.html">Contact</a>
             <a href="resources.html">Resources</a>
             <a href="#login" onclick = document.getElementById("loginModal").style.display="block">Login</a>
@@ -243,12 +245,18 @@
             providers and SAML providers.It is built on top of Firebase Auth.-->
 
         <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css" />
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css">
         <!--END - Code for FirebaseUI for Web — Auth. -->
+        
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#config-web-app -->
 
         <script>
-            // Initialize Firebase
-            var config = {
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
             apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
             authDomain: "weeat-c73e4.firebaseapp.com",
             databaseURL: "https://weeat-c73e4.firebaseio.com",
@@ -256,11 +264,10 @@
             storageBucket: "weeat-c73e4.appspot.com",
             messagingSenderId: "17474082925",
             appId: "1:17474082925:web:2ca69241a8edaea7"
-            };
-            firebase.initializeApp(config);
- 
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
         </script>
-                <script src="functions/index.js"></script>
-       
+
     </body>
 </html>

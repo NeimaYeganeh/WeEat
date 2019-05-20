@@ -1,4 +1,5 @@
 
+//var firebase = require("firebase");
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
@@ -11,9 +12,8 @@
 
 function login(){
 
-    window.alert("login function successfully called");
+alert("login function successfully called");
 
-var firebase = require("firebase");
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 //const functions = require('firebase-functions');
 
@@ -24,11 +24,12 @@ var firebase = require("firebase");
 
 
     // Get authentication elements
-    const userEmail = document.getElementById('user');
-    const pass = document.getElementById('pass');
-    const btnLogin = document.getElementById('Login');
+    const userEmail = document.getElementById("user");
+    const pass = document.getElementById("pass");
+    const btnLogin = document.getElementById("Login");
     
-    
+    window.alert(userEmail+"  "+pass);
+
     // Add login event
     btnLogin.addEventListener('click', e=>
         {
