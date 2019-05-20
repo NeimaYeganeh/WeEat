@@ -1,12 +1,25 @@
 
-(function(){
 
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+//import * as firebase from "firebase/app";
+
+// Add the Firebase services that you want to use
+//import "firebase/auth";
+//import "firebase/firestore";
+
+
+function login(){
+
+    window.alert("login function successfully called");
+
+var firebase = require("firebase");
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
-const functions = require('firebase-functions');
+//const functions = require('firebase-functions');
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
-const admin = require('firebase-admin');
-admin.initializeApp();
+//const admin = require('firebase-admin');
+//admin.initializeApp();
 
 
 
@@ -41,4 +54,4 @@ admin.initializeApp();
                 console.log('not logged in');
             }
         });
-}());
+}
