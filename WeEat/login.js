@@ -9,10 +9,10 @@
 //import "firebase/auth";
 //import "firebase/firestore";
 
-function login(){alert("login function successfully called")};
+//function login(){alert("login function successfully called")};
 
 
-/*
+
 function login(){
 
 alert("login function successfully called");
@@ -58,4 +58,4 @@ alert("login function successfully called");
                 console.log('not logged in');
             }
         });
-}*/
+}

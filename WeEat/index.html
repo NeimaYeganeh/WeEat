@@ -50,7 +50,7 @@
                 </div>
                 <!-- Container for Login Modal Buttons and Remember Me -->
                 <div class="login-container">
-                    <button type="submit">Login</button>
+                    <button type="submit" onsubmit="login()">Login</button>
                     <label>
                         <input type="checkbox" name="remember"> Remember me </input>
                     </label>
@@ -119,6 +119,6 @@
           firebase.initializeApp(firebaseConfig);
         </script>
 
-
+        <script src="login.js"></script>
     </body>
 </html>

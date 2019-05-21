@@ -5,8 +5,11 @@ node_js:
 script:
     - echo "Deploying!"
 install:
+    - npm install mocha -g
+    - npm install chai --save-dev
     - npm install -g firebase-tools
     - npm install --save firebase    
 
 after_success:
+    - mocha test
     - firebase deploy --token $FIREBASE_TOKEN
