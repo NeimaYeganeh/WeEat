@@ -25,10 +25,10 @@
         <!-- Login Modal -->
         <div id="loginModal" class="login">
             <!-- The Login Form -->
-            <form class = "login-content animate" action="./action.php">
+            <div class = "login-content animate" action="./action.php">
                 <!-- Container for Login Modal Image -->
                 <div class="login-imagecontainer">
-                    <span class="close" onsubmit=document.getElementById("loginModal").style.display="none">&times;</span>
+                    <span class="close" onclick=document.getElementById("loginModal").style.display="none">&times;</span>
                     <img src="wheat.png" alt="loginLogo" class="loginLogo">
                 </div>
                 <!-- Container for Login Modal Fields -->
@@ -39,23 +39,33 @@
                             <b>Username</b>
                         </label>
                     </center>
-                    <input type="text" placeholder="Username" name="user" required>
+                    <input type="text" id="user" placeholder="Username" name="user" required>
                     <!-- Password -->
                     <center>
                         <label for="pass">
                             <b>Password</b>
                         </label>
                     </center>
-                    <input type="password" placeholder="Password" name="pass" required>
+                    <input type="password" id="pass"  placeholder="Password" name="pass" required>
                 </div>
                 <!-- Container for Login Modal Buttons and Remember Me -->
                 <div class="login-container">
-                    <button type="submit" onsubmit="login()">Login</button>
+                    <button type="submit" id="btnLogin" onclick="login()">Login</button>
                     <label>
                         <input type="checkbox" name="remember"> Remember me </input>
                     </label>
                 </div>
-            </form>
+
+                
+                <div id="user_div" class="logged_in">
+                   
+                           <p id="user_para">" "</p>
+                           
+                    <!-- <button id="" onclick="logout()">Logout</button> -->
+                </div> 
+ 
+
+            </div>
         </div>
         
         <!-- Navigational Bar -->
@@ -119,6 +129,6 @@
           firebase.initializeApp(firebaseConfig);
         </script>
 
-        <script src="login.js"></script>
+        <script src="https://weeat-c73e4.firebaseapp.com/login.js"></script>
     </body>
 </html>
