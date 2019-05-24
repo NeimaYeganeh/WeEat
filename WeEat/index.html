@@ -9,7 +9,34 @@
 
         //Moved WeEat CSS style into separate file
         <link rel="stylesheet" type="text/css" href="https://weeat-c73e4.firebaseapp.com/css/style.css">       
-       
+        <style>
+                .marker {
+                  background-image: url('marker.png');
+                  background-size: cover;
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  cursor: pointer;
+                }
+                
+                .featuredmarker {
+                  background-image: url('featuredmarker.png');
+                  background-size: cover;
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  cursor: pointer;
+                }
+                
+                .mapboxgl-popup {
+                  max-width: 200px;
+                }
+
+                .mapboxgl-popup-content {
+                  text-align: center;
+                  font-family: montserrat, sans-serif;
+                }
+        </style>
         //Mapbox js
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'>
             
@@ -83,9 +110,76 @@
             
             var map = new mapboxgl.Map({
                 container: 'map', // container id
-                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+                style: 'mapbox://styles/mapbox/light-v10', // stylesheet location mapbox://styles/mapbox/streets-v11
                 center: [-120.6612399, 35.300745], // starting position [lng, lat]
                 zoom: 16 // starting zoom
+            });
+            var geojson = {
+                type: 'FeatureCollection',
+                features: [{
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [-120.663604, 35.301861]
+                    },
+                    properties: {
+                      title: 'Free Cookies!',
+                      location: 'Library',
+                      time: '6:00 PM - 7:00 PM',
+                      contact: '(707) 222-4444',
+                      sponsor: 'Cookie Club'
+                    }
+                    }]
+                };
+            geojson.features.forEach(function(marker) {
+
+                // create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'marker';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.location + '</p>'
+                +'<p>'+marker.properties.time+'</p>'
+                +'<p>'+marker.properties.contact+'</p>'
+                +'<p>'+marker.properties.sponsor+'</p>'))
+                .addTo(map);
+            });
+            
+            var geojsonfeatured = {
+                type: 'FeatureCollection',
+                features: [{
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [-120.661361, 35.297982]
+                    },
+                    properties: {
+                      title: 'Cal Poly Food Pantry',
+                      location: 'Health Center',
+                      time: '8:00 AM - 4:30 PM',
+                      contact: '(805) 756-6181',
+                      sponsor: 'Campus Health & Wellbeing'
+                    }
+                    }]
+                };
+            geojsonfeatured.features.forEach(function(marker) {
+
+                // create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'featuredmarker';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.location + '</p>'
+                +'<p>'+marker.properties.time+'</p>'
+                +'<p>'+marker.properties.contact+'</p>'
+                +'<p>'+marker.properties.sponsor+'</p>'))
+                .addTo(map);
             });
         </script>
         
