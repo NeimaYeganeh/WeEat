@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "pinID": "1234"
+      },
+      "geometry": {
+        "coordinates": [35.27, -120.66]
+      }
+    }
+  ]
+}
