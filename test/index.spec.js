@@ -6,3 +6,9 @@ describe("index.js tests", function() {
         expect(index.addTwoNumbers(0, 0)).to.be.a("number");
     });
 });
+
+describe("index.js tests", function() {
+    it("addTwoNumbers returns a number", function() {
+        expect(index.addTwoNumbers(0, 0)).to.be.a("number");
+    });
+});
