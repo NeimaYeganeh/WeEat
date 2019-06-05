@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
         <link rel="icon" href="icon.ico">
         <link rel="stylesheet" href="https://use.typekit.net/ifu7ayx.css">
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet'>
@@ -35,6 +35,11 @@
                 .mapboxgl-popup-content {
                   text-align: center;
                   font-family: montserrat, sans-serif;
+                }
+
+                .logged_in{
+                	text-align: right;
+                	color: #f2f2f2;
                 }
         </style>
         //Mapbox js
@@ -83,28 +88,25 @@
                     </label>
                 </div>
 
-                
-                <div id="user_div" class="logged_in">
-                   
-                           <p id="user_para">" "</p>
-                           
-                    <!-- <button id="" onclick="logout()">Logout</button> -->
-                </div> 
- 
+             
 
             </div>
         </div>
-        
+
+
         <!-- Navigational Bar -->
-        <div class="navigation">
+        <div class="navigation" id="homepage">
             <img src = "logo.png" alt = "logo" id ="logo" onclick="homepage()">
             <a href="contact.html">Contact</a>
             <a href="resources.html">Resources</a>
             <a href="#login" onclick = document.getElementById("loginModal").style.display="block">Login</a>
+            <div id="user_div" class="logged_in">
+			    <p id="user_para">" "</p>
+       		</div>   
         </div>
         
         <!-- Map -->
-        <div id='map'></div>
+        <div id="map"></div>
         <script>
             mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
             
@@ -223,6 +225,6 @@
           firebase.initializeApp(firebaseConfig);
         </script>
 
-        <script src="https://weeat-c73e4.firebaseapp.com/login.js"></script>
+        <script src="./login.js"></script>
     </body>
 </html>
