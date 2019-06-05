@@ -1,74 +1,74 @@
-import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import React, { Component } from "react";
 import NavBar from "./components/navbar";
-import * as pinLocations from "./assets/data/pin-data.json";
-import pinIcon from "./assets/imgs/wheat.png";
+import Map from "./components/map";
+import fire from "./config/fire";
+import Login from "./components/login";
 
-export default function App() {
-  const [viewport, setViewport] = useState({
-    latitude: 35.2840717,
-    longitude: -120.6592698,
-    width: "100vw",
-    height: "100vh",
-    zoom: 15
-  });
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {},
+      email: "not a email",
+      password: "not a password",
+      loggingIn: false
+    };
+  }
 
-  const [selectedPin, setSelectedPin] = useState(null);
+  // called once upon class creation to set up listener
+  componentDidMount() {
+    this.authListener();
+  }
 
-  useEffect(() => {
-    const listener = e => {
-      if (e.key === "Escape") {
-        setSelectedPin(null);
+  // listener to detect changes in firebase
+  authListener() {
+    fire.auth().onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
       }
-    };
-    window.addEventListener("keydown", listener);
+    });
+  }
 
-    return () => {
-      window.removeEventListener("keydown", listener);
-    };
-  }, []);
+  // Changes state of logginIn to display/hide login window
+  handleLoginWindow = () => {
+    this.setState({
+      loggingIn: !this.state.loggingIn
+    });
+  };
 
-  return (
-    <React.Fragment>
-      <NavBar />
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        onViewportChange={viewport => {
-          setViewport(viewport);
-        }}
-      >
-        {pinLocations.features.map(pin => (
-          <Marker
-            key={pin.properties.pinID}
-            latitude={pin.geometry.coordinates[0]}
-            longitude={pin.geometry.coordinates[1]}
-          >
-            <button
-              className="pin-btn"
-              onClick={e => {
-                e.preventDefault();
-                setSelectedPin(pin);
-              }}
-            >
-              <img src={pinIcon} alt="pin-icon" />
-            </button>
-          </Marker>
-        ))}
-        {selectedPin ? (
-          <Popup
-            latitude={selectedPin.geometry.coordinates[0]}
-            longitude={selectedPin.geometry.coordinates[1]}
-            onClose={() => {
-              setSelectedPin(null);
-            }}
-          >
-            <React.Fragment>
-              <h2>{selectedPin.properties.pinID}</h2>
-            </React.Fragment>
-          </Popup>
-        ) : null}
-      </ReactMapGL>
-    </React.Fragment>
-  );
+  // Makes requests to FB DB for user
+  handleLogin = (email, password) => {
+    console.log("login called");
+    fire
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(u => {
+        console.log("login success!");
+        this.componentDidUpdate(this.state.loggingIn, false);
+      })
+      .catch(error => {
+        console.log("login failed");
+        console.log(error);
+      });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar onLoginWindow={this.handleLoginWindow} user={this.state.user} />
+        <Map />
+        {this.state.loggingIn === true && (
+          <Login
+            onLoginWindow={this.handleLoginWindow}
+            onLogin={this.handleLogin}
+          />
+        )}
+      </React.Fragment>
+    );
+  }
 }
+
+export default App;
