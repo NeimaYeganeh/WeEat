@@ -11,10 +11,12 @@ firebase.auth().onAuthStateChanged(function(user) {
         var addPin = document.createElement('img');
         addPin.src="addbutton.png";
         addPin.setAttribute('href','#pinInfo');
-        addPin.setAttribute('onclick','document.getElementById("pinInfoModal").style.display="block"');
+        addPin.setAttribute('onclick','getCoordinates()');
+        addPin.setAttribute('cursor','pointer');
         //adding the addPin button onto map
         document.getElementById("map").appendChild(addPin);
         aTag.innerHTML = "Admin Pannel";
+        aTag.setAttribute('href', 'AdminPanel/adminpanel.html')
         anchor[2].innerHTML="Logout";
         anchor[2].removeAttribute("href");
         anchor[2].setAttribute('onclick','logout()');
@@ -92,18 +94,22 @@ function addNewPin(){
   .catch(function(error) {
       console.error("Error writing document: ", error);
   });
-
+document.getElementById("pinInfoModal").style.display="none";
 }
 
-function displayMapAndPins(){
-  mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
+// Global Map variable
+mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
 
-  var map = new mapboxgl.Map({
-          container: 'map', // container id
-          style: 'mapbox://styles/mapbox/light-v10', // stylesheet location mapbox://styles/mapbox/streets-v11
-          center: [-120.6612399, 35.300745], // starting position [lng, lat]
-          zoom: 16 // starting zoom
-  });
+var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/light-v10', // stylesheet location mapbox://styles/mapbox/streets-v11
+      center: [-120.6612399, 35.300745], // starting position [lng, lat]
+      zoom: 16 // starting zoom
+});
+
+// End of Global Map Variable
+
+function displayMapAndPins(){
   var db = firebase.firestore();
   //getting pin info from db
   db.collection("Pins")
@@ -123,4 +129,26 @@ function displayMapAndPins(){
             .addTo(map);
           });
       });
+    
+}
+
+function getCoordinates(){
+    map.getCanvas().style.cursor = 'crosshair'
+    map.on('click', function (e) {
+        // Acquire Longitude and Lattitude
+        var lattitude = e.lngLat.lat;
+        var longitude = e.lngLat.lng;
+        
+        console.log('Latitude:'+lattitude);
+        console.log('Longitude:'+longitude);
+        
+        // Set Cursor back to default
+        map.getCanvas().style.cursor = 'grab'
+        
+        // Populate Modal Box
+        document.getElementById("long").value = longitude;
+        document.getElementById("lat").value = lattitude;
+        
+        document.getElementById("pinInfoModal").style.display="block";
+    });
 }
