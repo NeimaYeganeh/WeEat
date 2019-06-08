@@ -7,11 +7,11 @@ $(document).ready(() => {
 renderPinTable = () => {
     let pins = [
         {
-            num: 420,
+            num: 132,
             name: 'Neim',
         },
         {
-            num: 69,
+            num: 34,
             name: 'Nat',
         },
         {
@@ -24,11 +24,11 @@ renderPinTable = () => {
         },
         {
             num: 1234,
-            name: 'Egg',
+            name: 'Yeg',
         },
         {
             num: 4321,
-            name: 'Egg Man',
+            name: 'Megan',
         },
     ];
     let format = '<"fg-toolbar ui-toolbar ui-widget-header ui-helper-clearfix ui-corner-tl ui-corner-tr"lfr>'
