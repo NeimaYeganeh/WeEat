@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
         <link rel="icon" href="icon.ico">
         <link rel="stylesheet" href="https://use.typekit.net/ifu7ayx.css">
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet'>
@@ -8,7 +8,7 @@
 		<title>WeEat</title>
 
         //Moved WeEat CSS style into separate file
-        <link rel="stylesheet" type="text/css" href="https://weeat-c73e4.firebaseapp.com/css/style.css">       
+        <link rel="stylesheet" type="text/css" href="https://weeat-c73e4.firebaseapp.com/css/style.css">
         <style>
                 .marker {
                   background-image: url('marker.png');
@@ -18,7 +18,7 @@
                   border-radius: 50%;
                   cursor: pointer;
                 }
-                
+
                 .featuredmarker {
                   background-image: url('featuredmarker.png');
                   background-size: cover;
@@ -27,7 +27,7 @@
                   border-radius: 50%;
                   cursor: pointer;
                 }
-                
+
                 .mapboxgl-popup {
                   max-width: 200px;
                 }
@@ -36,18 +36,24 @@
                   text-align: center;
                   font-family: montserrat, sans-serif;
                 }
+
+                .logged_in{
+                	text-align: right;
+                	color: #f2f2f2;
+                }
+
         </style>
         //Mapbox js
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'>
-            
+
         //  Go to homepage when the logo is clicked
         function homepage(){
             window.location.href = 'index.html';
         }
         </script>
     </head>
-    
-    
+
+
     <body>
         <!-- Login Modal -->
         <div id="loginModal" class="login">
@@ -83,123 +89,103 @@
                     </label>
                 </div>
 
-                
-                <div id="user_div" class="logged_in">
-                   
-                           <p id="user_para">" "</p>
-                           
-                    <button id="" onclick="logout()">Logout</button>
-                </div> 
- 
 
             </div>
         </div>
-        
+				<div id="pinInfoModal" class="pinInfo">
+					<!-- The PinInfo Form -->
+					<div class = "pinInfo-content animate" action="./action.php">
+							<!-- Container for PinInfo Modal Image -->
+							<div class="pinInfo-imagecontainer">
+									<span class="close" onclick=document.getElementById("pinInfoModal").style.display="none">&times;</span>
+							</div>
+							<!-- Container for PinInfo Modal Fields -->
+							<div class="pinInfo-container">
+									<left>
+											<label>
+													<b>Longitude</b>
+											</label>
+									</left>
+									<input type="number" id="long" placeholder="Longitude: -180 to 180" name="lat" required>
+									<left>
+											<label>
+													<b>Latitude</b>
+											</label>
+									</left>
+									<input type="number" id="lat"  placeholder="Latitude -90 to 90" name="long" required>
+									<left>
+											<label>
+													<b>Event Title</b>
+											</label>
+									</left>
+									<input type="text" id="title"  placeholder="Title" name="title" required>
+									<left>
+											<label>
+													<b>Location</b>
+											</label>
+									</left>
+									<input type="text" id="location"  placeholder="Location" name="location" required>
+									<left>
+											<label>
+													<b>Time Range</b>
+											</label>
+									</left>
+									<input type="text" id="time"  placeholder="Time Range" name="time range" required>
+									<left>
+											<label>
+													<b>Contact Info</b>
+											</label>
+									</left>
+									<input type="text" id="contact"  placeholder="Contact Info" name="contact" required>
+									<left>
+											<label>
+													<b>Sponsor</b>
+											</label>
+									</left>
+									<input type="text" id="sponsor"  placeholder="Sponsor" name="sponsor" required>
+							</div>
+							<!-- Container for PinInfo Modal Buttons and Remember Me -->
+							<div class="pinInfo-container">
+									<button type="submit" id="btnAddPin" onclick="addNewPin()">AddPin</button>
+							</div>
+
+
+
+					</div>
+			</div>
+
         <!-- Navigational Bar -->
-        <div class="navigation">
+        <div class="navigation" id="homepage">
             <img src = "logo.png" alt = "logo" id ="logo" onclick="homepage()">
             <a href="contact.html">Contact</a>
             <a href="resources.html">Resources</a>
             <a href="#login" onclick = document.getElementById("loginModal").style.display="block">Login</a>
-            <a href="adminpanel.html">Admin Panel</a>
+            <a href="./AdminPanel/adminpanel.html">Admin Panel</a>
+
+            <div id="user_div" class="logged_in">
+			    <p id="user_para" onclick="addNewPin()"></p>
+       		</div>
+
+
         </div>
-        
-        <!-- Map -->
-        <div id='map'></div>
-        <script>
-            mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
-            
-            var map = new mapboxgl.Map({
-                container: 'map', // container id
-                style: 'mapbox://styles/mapbox/light-v10', // stylesheet location mapbox://styles/mapbox/streets-v11
-                center: [-120.6612399, 35.300745], // starting position [lng, lat]
-                zoom: 16 // starting zoom
-            });
-            var geojson = {
-                type: 'FeatureCollection',
-                features: [{
-                    type: 'Feature',
-                    geometry: {
-                      type: 'Point',
-                      coordinates: [-120.663604, 35.301861]
-                    },
-                    properties: {
-                      title: 'Free Cookies!',
-                      location: 'Library',
-                      time: '6:00 PM - 7:00 PM',
-                      contact: '(707) 222-4444',
-                      sponsor: 'Cookie Club'
-                    }
-                    }]
-                };
-            geojson.features.forEach(function(marker) {
 
-                // create a HTML element for each feature
-                var el = document.createElement('div');
-                el.className = 'marker';
-
-                // make a marker for each feature and add to the map
-                new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.location + '</p>'
-                +'<p>'+marker.properties.time+'</p>'
-                +'<p>'+marker.properties.contact+'</p>'
-                +'<p>'+marker.properties.sponsor+'</p>'))
-                .addTo(map);
-            });
-            
-            var geojsonfeatured = {
-                type: 'FeatureCollection',
-                features: [{
-                    type: 'Feature',
-                    geometry: {
-                      type: 'Point',
-                      coordinates: [-120.661361, 35.297982]
-                    },
-                    properties: {
-                      title: 'Cal Poly Food Pantry',
-                      location: 'Health Center',
-                      time: '8:00 AM - 4:30 PM',
-                      contact: '(805) 756-6181',
-                      sponsor: 'Campus Health & Wellbeing'
-                    }
-                    }]
-                };
-            geojsonfeatured.features.forEach(function(marker) {
-
-                // create a HTML element for each feature
-                var el = document.createElement('div');
-                el.className = 'featuredmarker';
-
-                // make a marker for each feature and add to the map
-                new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.location + '</p>'
-                +'<p>'+marker.properties.time+'</p>'
-                +'<p>'+marker.properties.contact+'</p>'
-                +'<p>'+marker.properties.sponsor+'</p>'))
-                .addTo(map);
-            });
-        </script>
-        
-        
-        
+				<div id="map" class="map_setting">
+				</div>
         <!-- Libraries -->
 
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
 
         <!-- Firebase Authentication -->
-        <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+				<script defer src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 
         <!--BEGIN - Code for FirebaseUI for Web — Auth.
 
             REFERENCE - https://github.com/firebase/firebaseui-web#installation
-            SUMMARY - Drop-in auth solution that handles the UI flows for signing in users with 
-            email addresses and passwords, phone numbers, Identity Provider Sign In 
-            including Google, Facebook, GitHub, Twitter, Microsoft, Yahoo, OpenID Connect (OIDC) 
+            SUMMARY - Drop-in auth solution that handles the UI flows for signing in users with
+            email addresses and passwords, phone numbers, Identity Provider Sign In
+            including Google, Facebook, GitHub, Twitter, Microsoft, Yahoo, OpenID Connect (OIDC)
             providers and SAML providers.It is built on top of Firebase Auth.-->
 
         <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
@@ -209,20 +195,20 @@
         <!-- TODO: Add SDKs for Firebase products that you want to use
              https://firebase.google.com/docs/web/setup#config-web-app -->
 
-        <script>
-          // Your web app's Firebase configuration
-          var firebaseConfig = {
-            apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
-            authDomain: "weeat-c73e4.firebaseapp.com",
-            databaseURL: "https://weeat-c73e4.firebaseio.com",
-            projectId: "weeat-c73e4",
-            storageBucket: "weeat-c73e4.appspot.com",
-            messagingSenderId: "17474082925",
-            appId: "1:17474082925:web:2ca69241a8edaea7"
-          };
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-        </script>
+			  <script>
+		   // Your web app's Firebase configuration
+					   var firebaseConfig = {
+					     apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
+					     authDomain: "weeat-c73e4.firebaseapp.com",
+					     databaseURL: "https://weeat-c73e4.firebaseio.com",
+					     projectId: "weeat-c73e4",
+					     storageBucket: "weeat-c73e4.appspot.com",
+					     messagingSenderId: "17474082925",
+					     appId: "1:17474082925:web:2ca69241a8edaea7"
+					   };
+					   // Initialize Firebase
+					   firebase.initializeApp(firebaseConfig);
+		    </script>
 
         <script src="https://weeat-c73e4.firebaseapp.com/login.js"></script>
     </body>
