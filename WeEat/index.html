@@ -41,6 +41,12 @@
                 	text-align: right;
                 	color: #f2f2f2;
                 }
+								.long{
+									display: none;
+								}
+								.lat{
+									display: none;
+								}
 
         </style>
         //Mapbox js
@@ -104,18 +110,6 @@
 							<div class="pinInfo-container">
 									<left>
 											<label>
-													<b>Longitude</b>
-											</label>
-									</left>
-									<input type="number" id="long" placeholder="Longitude: -180 to 180" name="lat" required>
-									<left>
-											<label>
-													<b>Latitude</b>
-											</label>
-									</left>
-									<input type="number" id="lat"  placeholder="Latitude -90 to 90" name="long" required>
-									<left>
-											<label>
 													<b>Event Title</b>
 											</label>
 									</left>
@@ -170,6 +164,8 @@
         </div>
 
 				<div id="map" class="map_setting">
+					<p type="number" id="long" placeholder="Longitude: -180 to 180" name="lat" required></p>
+					<p type="number" id="lat"  placeholder="Latitude -90 to 90" name="long" required></p>
 				</div>
         <!-- Libraries -->
 
@@ -210,6 +206,6 @@
 					   firebase.initializeApp(firebaseConfig);
 		    </script>
 
-        <script src="https://weeat-c73e4.firebaseapp.com/login.js"></script>
+        <script src="./login.js"></script>
     </body>
 </html>
