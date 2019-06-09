@@ -1,4 +1,5 @@
 function submitContactForm(){
+    event.preventDefault();
     let db = firebase.firestore();
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
@@ -13,9 +14,11 @@ function submitContactForm(){
         console.log("Document successfully written!");
         clearFields();
         displaySuccess();
+        return true;
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);
+        return false;
     });
 }
 
