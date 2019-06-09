@@ -27,6 +27,7 @@ getPins = (isInit) => {
                 pins.push(pin);
             }
         });
+        // wont allow you to create a new instance of the datatable
         if (isInit) {
             renderPinTable(pins);
             isInit = false;
@@ -43,7 +44,7 @@ renderPinTable = (pins) => {
         data: pins,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
         createdRow: (row, data, index) => {
-            $(row).addClass('clickableRow')
+            $(row).addClass('clickableRow');
             renderHTMLDataset($(row)[0], data);
         },
         columns: [
@@ -100,18 +101,50 @@ createPinInfoSection = (pinData) => {
     addDataRowToContainer('Location', pinData.location, container);
     addDataRowToContainer('Sponsor', pinData.sponsor, container);
     addDataRowToContainer('Contact', pinData.contact, container);
-    let coordString = `(${pinData.long}, ${pinData.lat})`;
+
+    let coordString = `(${pinData.lat} lat, ${pinData.long} long)`;
     addDataRowToContainer('Coordinates', coordString, container);
     
+    addDeleteBtn(pinData, container);
+    
     let pinInfoDiv = $('#pinInfoDiv');
-    pinInfoDiv.empty().append(container.outerHTML);
+    pinInfoDiv.css('border', '1px solid black');
+    
+//    border: 1px solid #FDCD65;
+    pinInfoDiv.empty().append(container); // singleton?
 }
 
 addDataRowToContainer = (name, data, container) => {
     let div = document.createElement('div');
-//    div.innerHTML = `<b>${name}:</b><br/>&nbsp${data}`;
     div.innerHTML = `<p class="fieldName">${name}:</p><p class="fieldData">${data}</p>`;
     container.appendChild(div);
+}
+
+addDeleteBtn = (pinData, container) => {
+    let btn = document.createElement('a');
+    btn.id = 'deleteBtn';
+    btn.innerHTML = 'Delete Pin';
+    btn.onclick = () => {
+        if (confirm(`Are you sure you want to delete the pin for '${pinData.title}' at ${pinData.time}?`)) {
+            console.log('confirmed');
+            
+            let db = firebase.firestore();
+            db.collection("Pins").doc(pinData.title).delete().then(() => {
+                $('#pinInfoDiv').empty();
+                pinInfoDiv.css('border', 'none');
+            }).catch((error) => {
+                console.error('Error removing document:', error);
+            })
+            
+        } else {
+            console.log('denied');
+        }
+    }
+    
+    let btnContainer = document.createElement('div');
+    btnContainer.id = 'btnContainer';
+    btnContainer.appendChild(btn);
+    container.appendChild(btnContainer);
 }
 
 

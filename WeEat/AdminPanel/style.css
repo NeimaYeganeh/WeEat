@@ -139,10 +139,18 @@ input[type=text], input[type=password] {
 
 /* Page CSS */
 
+body {
+    background-color: #FCFCF6;
+}
+
 #pinPageContainer {
     position:absolute;
     top: 70px;
     display:flex;
+}
+
+#pinInfoDiv {
+    padding: 20px;
 }
 
 .pinSection {
@@ -163,5 +171,30 @@ input[type=text], input[type=password] {
 }
 
 .clickableRow:hover {
-    background: lightgray;
+    background: #FAA51D !important;
+}
+
+.odd {
+    background: #F5F5E7 !important;
+}
+
+#deleteBtn {
+    background-color: crimson;
+    border-radius: 5px;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+    box-shadow: 2px 2px 2px black;
+}
+
+#deleteBtn:hover {
+    background-color: darkred;
+}
+
+#btnContainer {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
