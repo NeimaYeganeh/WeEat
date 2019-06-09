@@ -15,7 +15,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         addPin.setAttribute('cursor','pointer');
         //adding the addPin button onto map
         document.getElementById("map").appendChild(addPin);
-        aTag.innerHTML = "Admin Pannel";
+        aTag.innerHTML = "Admin Panel";
         aTag.setAttribute('href', 'AdminPanel/adminpanel.html')
         anchor[2].innerHTML="Logout";
         anchor[2].removeAttribute("href");

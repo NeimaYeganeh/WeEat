@@ -7,7 +7,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         var anchor = nav_id.getElementsByTagName('a');
         var aTag = document.createElement('a');
         
-        aTag.innerHTML = "Admin Pannel";
+        aTag.innerHTML = "Admin Panel";
         aTag.setAttribute('href', 'AdminPanel/adminpanel.html')
         anchor[2].innerHTML="Logout";
         anchor[2].removeAttribute("href");
