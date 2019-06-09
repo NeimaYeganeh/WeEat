@@ -11,7 +11,9 @@
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
-    "requirejs": "^2.3.6"
+    "mocha": "^6.1.4",
+    "requirejs": "^2.3.6",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
