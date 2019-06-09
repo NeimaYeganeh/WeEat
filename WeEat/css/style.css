@@ -61,7 +61,7 @@
               position:absolute;
               bottom: 4%;
               z-index: 7;
-              left:0%;
+              left: 2%;
             }
             .map_setting img:hover {
                 cursor:pointer;
@@ -195,7 +195,7 @@
 
 
             .pinInfo-container button {
-                background-color: #ED5E17;
+                background-color: #FF5F83;
                 color: white;
                 padding: 14px 20px;
                 margin: 0px 140px;
