@@ -41,6 +41,12 @@
                 	text-align: right;
                 	color: #f2f2f2;
                 }
+								.long{
+									display: none;
+								}
+								.lat{
+									display: none;
+								}
 
         </style>
         //Mapbox js
@@ -98,22 +104,10 @@
 					<div class = "pinInfo-content animate" action="./action.php">
 							<!-- Container for PinInfo Modal Image -->
 							<div class="pinInfo-imagecontainer">
-									<span class="close" onclick=document.getElementById("pinInfoModal").style.display="none">&times;</span>
+									<span class="close" onclick=closePinModal()>&times;</span>
 							</div>
 							<!-- Container for PinInfo Modal Fields -->
 							<div class="pinInfo-container">
-									<left>
-											<label>
-													<b>Longitude</b>
-											</label>
-									</left>
-									<input type="number" id="long" placeholder="Longitude: -180 to 180" name="lat" required>
-									<left>
-											<label>
-													<b>Latitude</b>
-											</label>
-									</left>
-									<input type="number" id="lat"  placeholder="Latitude -90 to 90" name="long" required>
 									<left>
 											<label>
 													<b>Event Title</b>
@@ -147,7 +141,7 @@
 							</div>
 							<!-- Container for PinInfo Modal Buttons and Remember Me -->
 							<div class="pinInfo-container">
-									<button type="submit" id="btnAddPin" onclick="addNewPin()">AddPin</button>
+									<button type="submit" id="btnAddPin" onclick="addNewPin()">Add Pin</button>
 							</div>
 
 
@@ -170,6 +164,8 @@
         </div>
 
 				<div id="map" class="map_setting">
+					<p type="number" id="long" placeholder="Longitude: -180 to 180" name="lat" required></p>
+					<p type="number" id="lat"  placeholder="Latitude -90 to 90" name="long" required></p>
 				</div>
         <!-- Libraries -->
 
