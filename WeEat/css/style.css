@@ -61,7 +61,7 @@
               position:absolute;
               bottom: 4%;
               z-index: 7;
-              left: 4%;
+              left: 1%;
             }
             .map_setting img:hover {
                 cursor:pointer;
