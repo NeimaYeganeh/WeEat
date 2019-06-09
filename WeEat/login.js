@@ -80,7 +80,7 @@ function addNewPin(){
   var userContact = document.getElementById("contact").value;
   var userSponsor = document.getElementById("sponsor").value;
 
-  db.collection("Pins").doc().set({
+  db.collection("Pins").doc(userTitle).set({
     coordinates: [parseFloat(longitude), parseFloat(latitude)],
     title: userTitle,
     location: userLocation,
@@ -129,7 +129,7 @@ function displayMapAndPins(){
             .addTo(map);
           });
       });
-    
+
 }
 
 function getCoordinates(){
@@ -138,17 +138,17 @@ function getCoordinates(){
         // Acquire Longitude and Lattitude
         var lattitude = e.lngLat.lat;
         var longitude = e.lngLat.lng;
-        
+
         console.log('Latitude:'+lattitude);
         console.log('Longitude:'+longitude);
-        
+
         // Set Cursor back to default
         map.getCanvas().style.cursor = 'grab'
-        
+
         // Populate Modal Box
         document.getElementById("long").value = longitude;
         document.getElementById("lat").value = lattitude;
-        
+
         document.getElementById("pinInfoModal").style.display="block";
     });
 }
