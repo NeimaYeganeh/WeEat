@@ -27,6 +27,7 @@ body {
 .navigation a:hover {
     background-color: #181919;
     color: white;
+    cursor: pointer;
 }
 
 .navigation a.active {
