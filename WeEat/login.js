@@ -82,13 +82,6 @@ function logout(){
 }
 
 function addNewPin(){
-  map.on('click', function (e) {
-      // Acquire Longitude and Lattitude
-
-      map.getCanvas().style.cursor = 'grab';
-
-      document.getElementById("pinInfoModal").style.display="none";
-  });
   var db = firebase.firestore();
   var longitude = document.getElementById("long").value;
   var latitude = document.getElementById("lat").value;
@@ -158,6 +151,13 @@ function getCoordinates(){
 }
 
 function closePinModal(){
+    map.on('click', function (e) {
+      // Acquire Longitude and Lattitude
+
+      map.getCanvas().style.cursor = 'grab';
+
+      document.getElementById("pinInfoModal").style.display="none";
+    });
     document.getElementById("pinInfoModal").style.display="none";
     document.getElementById("long").value = '';
     document.getElementById("lat").value = '';
