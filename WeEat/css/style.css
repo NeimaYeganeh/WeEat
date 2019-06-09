@@ -207,3 +207,9 @@
             }
 
             #map { position:absolute; top:0; bottom:0; width:100%; }
+            
+            .logged_in{
+                	text-align: right;
+                	color: #f2f2f2;
+                    padding: 0px 16px;
+                }
