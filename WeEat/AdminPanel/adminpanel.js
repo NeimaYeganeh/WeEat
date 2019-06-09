@@ -1,5 +1,3 @@
-//var dt = require('datatables.net')();
-
 $(document).ready(() => {
     //Hides Admin Panel if not logged in and redirects user to homepage
     firebase.auth().onAuthStateChanged(function(user) {
@@ -23,10 +21,12 @@ getPins = (isInit) => {
         let pins = [];
         querySnapshot.forEach((doc) => {
             let pin = doc.data();
+            // wont add duplicate pin to array
             if (!pins.includes(pin)) {
                 pins.push(pin);
             }
         });
+
         // wont allow you to create a new instance of the datatable
         if (isInit) {
             renderPinTable(pins);
@@ -66,6 +66,7 @@ renderPinTable = (pins) => {
     setRowListeners();
 }
 
+// sets the dataset of the html element so that the table row contains all the pin info
 renderHTMLDataset = (row, data) => {
     row.dataset.title = data.title || '';
     row.dataset.time = data.time || '';
@@ -85,13 +86,17 @@ refreshPinTable = (pins) => {
     setRowListeners();
 }
 
+// adds listeners to all the table rows
 setRowListeners = () => {
+    // gets the pin data from the row clicked
     $('#pinTable tbody').on('click', 'tr', (event) => {
         let rowData = event.currentTarget.dataset;
         createPinInfoSection(rowData);
     });
 }
 
+// uses the pin info that was retrieved from the html tr element
+// to display that pin info nicely formatted in its div on the right side of the page
 createPinInfoSection = (pinData) => {
     console.log(pinData);
     let container = document.createElement('div');
@@ -109,9 +114,7 @@ createPinInfoSection = (pinData) => {
     
     let pinInfoDiv = $('#pinInfoDiv');
     pinInfoDiv.css('border', '1px solid black');
-    
-//    border: 1px solid #FDCD65;
-    pinInfoDiv.empty().append(container); // singleton?
+    pinInfoDiv.empty().append(container);
 }
 
 addDataRowToContainer = (name, data, container) => {
@@ -125,6 +128,7 @@ addDeleteBtn = (pinData, container) => {
     btn.id = 'deleteBtn';
     btn.innerHTML = 'Delete Pin';
     btn.onclick = () => {
+        // a confirm is like an alert but has a 'cancel' option, not just 'ok'
         if (confirm(`Are you sure you want to delete the pin for '${pinData.title}' at ${pinData.time}?`)) {
             console.log('confirmed');
             
@@ -140,13 +144,11 @@ addDeleteBtn = (pinData, container) => {
             console.log('denied');
         }
     }
-    
+
+    // for button centering purposes (used a containing div)
     let btnContainer = document.createElement('div');
     btnContainer.id = 'btnContainer';
     btnContainer.appendChild(btn);
     container.appendChild(btnContainer);
 }
-
-
-
 

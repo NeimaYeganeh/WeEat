@@ -189,6 +189,7 @@ body {
 
 #deleteBtn:hover {
     background-color: darkred;
+    cursor: pointer;
 }
 
 #btnContainer {
