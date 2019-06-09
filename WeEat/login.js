@@ -152,10 +152,7 @@ function getCoordinates(){
 
 function closePinModal(){
     map.on('click', function (e) {
-      // Acquire Longitude and Lattitude
-
       map.getCanvas().style.cursor = 'grab';
-
       document.getElementById("pinInfoModal").style.display="none";
     });
     document.getElementById("pinInfoModal").style.display="none";
