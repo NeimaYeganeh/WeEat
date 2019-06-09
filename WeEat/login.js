@@ -40,6 +40,17 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 });
 
+// Global Map variable
+mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
+
+var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/light-v10', // stylesheet location mapbox://styles/mapbox/streets-v11
+      center: [-120.6612399, 35.300745], // starting position [lng, lat]
+      zoom: 16 // starting zoom
+});
+
+// End of Global Map Variable
 
 function login()
 {
@@ -71,6 +82,13 @@ function logout(){
 }
 
 function addNewPin(){
+  map.on('click', function (e) {
+      // Acquire Longitude and Lattitude
+
+      map.getCanvas().style.cursor = 'grab';
+
+      document.getElementById("pinInfoModal").style.display="none";
+  });
   var db = firebase.firestore();
   var longitude = document.getElementById("long").value;
   var latitude = document.getElementById("lat").value;
@@ -96,18 +114,6 @@ function addNewPin(){
   });
 document.getElementById("pinInfoModal").style.display="none";
 }
-
-// Global Map variable
-mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
-
-var map = new mapboxgl.Map({
-      container: 'map', // container id
-      style: 'mapbox://styles/mapbox/light-v10', // stylesheet location mapbox://styles/mapbox/streets-v11
-      center: [-120.6612399, 35.300745], // starting position [lng, lat]
-      zoom: 16 // starting zoom
-});
-
-// End of Global Map Variable
 
 function displayMapAndPins(){
   var db = firebase.firestore();
@@ -142,9 +148,7 @@ function getCoordinates(){
         console.log('Latitude:'+lattitude);
         console.log('Longitude:'+longitude);
 
-        // Set Cursor back to default
-        map.getCanvas().style.cursor = 'grab'
-
+        map.getCanvas().style.cursor = 'grab';
         // Populate Modal Box
         document.getElementById("long").value = longitude;
         document.getElementById("lat").value = lattitude;
