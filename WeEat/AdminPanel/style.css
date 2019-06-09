@@ -8,7 +8,7 @@ body {
 
 .navigation {
     overflow: hidden;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -138,3 +138,29 @@ input[type=text], input[type=password] {
 
 /* Page CSS */
 
+#pinPageContainer {
+    position:absolute;
+    top: 70px;
+    display:flex;
+}
+
+.pinSection {
+    margin: 10px;
+    display: flex;
+}
+
+.fieldName {
+    font-weight: bold;
+}
+
+.fieldData {
+    text-indent: 20px;
+}
+
+.clickableRow {
+    cursor: pointer;
+}
+
+.clickableRow:hover {
+    background: lightgray;
+}

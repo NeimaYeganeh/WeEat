@@ -46,61 +46,29 @@
         </script>
     </head>
     <body>
-        <!-- Login Modal -->
-        <div id="loginModal" class="login">
-            <!-- The Login Form -->
-            <form class = "login-content animate" action="./action.php">
-                <!-- Container for Login Modal Image -->
-                <div class="login-imagecontainer">
-                    <span class="close" onclick= document.getElementById("loginModal").style.display="none">&times;</span>
-                    <img src="../wheat.png" alt="loginLogo" class="loginLogo">
-                </div>
-                <!-- Container for Login Modal Fields -->
-                <div class="login-container">
-                    <!-- Username -->
-                    <center>
-                        <label for="user">
-                            <b>Username</b>
-                        </label>
-                    </center>
-                    <input type="text" placeholder="Username" name="user" required>
-                    <!-- Password -->
-                    <center>
-                        <label for="pass">
-                            <b>Password</b>
-                        </label>
-                    </center>
-                    <input type="password" placeholder="Password" name="pass" required>
-                </div>
-                <!-- Container for Login Modal Buttons and Remember Me -->
-                <div class="login-container">
-                    <button type="submit">Login</button>
-                    <label>
-                        <input type="checkbox" name="remember"> Remember me </input>
-                    </label>
-                </div>
-            </form>
-        </div>
         
-        <!-- Navigational Bar -->
-        <div class="navigation">
-            <img src = "../logo.png" alt = "logo" id ="logo" onclick="homepage()"/>
-            <a href="../contact.html">Contact</a>
-            <a href="../resources.html">Resources</a>
-            <a href="#login" onclick = document.getElementById("loginModal").style.display="block">Login</a>
-            <a href="./AdminPanel/adminpanel.html">Admin Panel</a>
+        <div>
+            <!-- Navigational Bar -->
+            <div class="navigation" style="">
+                <img src="../logo.png" alt="logo" id="logo" onclick="homepage()"/>
+                <a href="../contact.html">Contact</a>
+                <a href="../resources.html">Resources</a>
+                <a id="logoutBtn">Logout</a>
+                <a href="./adminpanel.html">Admin Panel</a>
+            </div>
+
+
+
+            <div id="pinPageContainer">
+                <div id="pinTableDiv" class="pinSection">
+                    <table id="pinTable">
+                    </table>
+                </div>
+                <div id="pinInfoDiv" class="pinSection">
+                </div>
+            </div>
         </div>
-    
-    
-    
-    <div id="pinTableDiv" style="padding:10px; padding-top:70px; width:50%;">
-        <table id="pinTable">
-        </table>
-    </div>
-    <div id="pinInfoDiv" style="padding:10px; padding-top:70px; width:50%;">
-        hi!
-    </div>
-    
+
         
     </body>
 </html>
