@@ -8,7 +8,7 @@ body {
 
 .navigation {
     overflow: hidden;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -27,6 +27,7 @@ body {
 .navigation a:hover {
     background-color: #181919;
     color: white;
+    cursor: pointer;
 }
 
 .navigation a.active {
@@ -138,3 +139,63 @@ input[type=text], input[type=password] {
 
 /* Page CSS */
 
+body {
+    background-color: #FCFCF6;
+}
+
+#pinPageContainer {
+    position:absolute;
+    top: 70px;
+    display:flex;
+}
+
+#pinInfoDiv {
+    padding: 20px;
+}
+
+.pinSection {
+    margin: 10px;
+    display: flex;
+}
+
+.fieldName {
+    font-weight: bold;
+}
+
+.fieldData {
+    text-indent: 20px;
+}
+
+.clickableRow {
+    cursor: pointer;
+}
+
+.clickableRow:hover {
+    background: #FAA51D !important;
+}
+
+.odd {
+    background: #F5F5E7 !important;
+}
+
+#deleteBtn {
+    background-color: crimson;
+    border-radius: 5px;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+    box-shadow: 2px 2px 2px black;
+}
+
+#deleteBtn:hover {
+    background-color: darkred;
+    cursor: pointer;
+}
+
+#btnContainer {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
