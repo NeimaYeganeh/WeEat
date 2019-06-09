@@ -112,7 +112,7 @@ function addNewPin(){
   .catch(function(error) {
       console.error("Error writing document: ", error);
   });
-document.getElementById("pinInfoModal").style.display="none";
+closePinModal();
 }
 
 function displayMapAndPins(){
@@ -155,4 +155,15 @@ function getCoordinates(){
 
         document.getElementById("pinInfoModal").style.display="block";
     });
+}
+
+function closePinModal(){
+    document.getElementById("pinInfoModal").style.display="none";
+    document.getElementById("long").value = '';
+    document.getElementById("lat").value = '';
+    document.getElementById("title").value = '';
+    document.getElementById("location").value = '';
+    document.getElementById("time").value = '';
+    document.getElementById("contact").value = '';
+    document.getElementById("sponsor").value = '';
 }
