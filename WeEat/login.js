@@ -94,7 +94,7 @@ function addNewPin(){
   .catch(function(error) {
       console.error("Error writing document: ", error);
   });
-document.getElementById("pinInfoModal").style.display="none";
+closePinModal();
 }
 
 // Global Map variable
