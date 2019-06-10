@@ -1,3 +1,6 @@
+// Create object container to export functions using module.exports
+let functions = {};
+
 firebase.auth().onAuthStateChanged(function(user) {
     displayMapAndPins();
     if (user)
@@ -52,7 +55,9 @@ var map = new mapboxgl.Map({
 
 // End of Global Map Variable
 
-function login()
+
+// Login function
+functions.login = function()
 {
   var userEmail = document.getElementById("user").value;
   var userPass = document.getElementById("pass").value;
@@ -164,3 +169,5 @@ function closePinModal(){
     document.getElementById("contact").value = '';
     document.getElementById("sponsor").value = '';
 }
+
+module.export.loginFunctions = functions;

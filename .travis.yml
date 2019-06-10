@@ -8,9 +8,11 @@ install:
     - npm install mocha -g
     - npm install chai --save-dev
     - npm install --save-dev supertest
+    - npm install --save-dev nyc
     - npm install --save-dev istanbul
     - npm install -g firebase-tools
 
 after_success:
     - mocha test
+    - npm run test-coverage
     - firebase deploy --token $FIREBASE_TOKEN
