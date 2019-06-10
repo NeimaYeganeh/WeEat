@@ -52,7 +52,7 @@ describe("Logout button appears when user Authenticates", function() {
 
 // function addNewPin()
 describe("Add New Pin Test", function() {
-    it("Login HTTP Status should be 200", function() {
+    it("Created pin should be valid", function() {
         expect(index.addTwoNumbers(0, 0)).to.be.a("number");
     });
 });
@@ -66,7 +66,7 @@ describe("Display Map Test", function() {
 
 // function displayMapAndPins()
 describe("Display Pins", function() {
-    it("Created pin should be valid", function() {
+    it("Map loads without error and pin elements present", function() {
         expect(index.addTwoNumbers(0, 0)).to.be.a("number");
     });
 });
