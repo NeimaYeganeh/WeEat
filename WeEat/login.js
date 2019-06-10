@@ -57,7 +57,7 @@ var map = new mapboxgl.Map({
 
 
 // Login function
-functions.login = function()
+function login()
 {
   var userEmail = document.getElementById("user").value;
   var userPass = document.getElementById("pass").value;
