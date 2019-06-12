@@ -1,12 +1,36 @@
+
+
+/*
+ * When require('../WeEat/login'); is used, all code in login.js file is included.
+ * Code not inside a function is immediately executed.
+ * This creates a problem because some of that code requires references created
+ * in the index.html file. 
+ *
+ * After doing some research, it seems like we need to figure out how to simulate
+ * a browser test environment in order to have access to certain elements like
+ * document and window which are used in our functions. Also, a firebase instance
+ * with proper configurations needs to be initialized for the functions access
+ * the firebase object.
+ *
+ * 
+ *
+ */
+
+//var addThreeNumbers = require('../WeEat/login');
+//var firebase = require("../node_modules/firebase");
+
 var index = require("../index");
-//var login = require("../WeEat/login.js");
+var firebase = require('firebase');
 var chai = require("chai");
 var request = require('supertest'); //HTTP post / get testing
 var expect = chai.expect;
+//const admin = require('firebase-admin');
+//admin.initializeApp();
+
 
 //const firebase = require('firebase/app');
 //var firebase = require("https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js");
-/*
+
 var firebaseConfig = {
                          apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
                          authDomain: "weeat-c73e4.firebaseapp.com",
@@ -18,13 +42,22 @@ var firebaseConfig = {
                        };
                        // Initialize Firebase
                        firebase.initializeApp(firebaseConfig);
-*/
+
 //var app = firebase.app();
 //const app = require("../WeEat/index");
 /*
 describe("index.js tests", function() {
     it("addTwoNumbers returns a number", function() {
         expect(login.login()).to.equal(undefined);
+    });
+});
+*/
+
+/*
+// Test require import
+describe("Login Successful Test", function() {
+    it("Function to test require import", function() {
+        expect(login.addThreeNumbers(0, 0, 0)).to.be.a("number");
     });
 });
 */

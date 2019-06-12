@@ -11,6 +11,7 @@
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
+    "mapbox-gl": "^1.0.0",
     "mocha": "^6.1.4",
     "requirejs": "^2.3.6",
     "supertest": "^4.0.2"
@@ -24,7 +25,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-coverage": "nyc mocha",
+    "test-coverage": "nyc --reporter=html mocha",
     "start": "npm run open",
     "open": "concurrently \"http-server -a localhost -p 1234\" \"open http://localhost:1234/\""
   },

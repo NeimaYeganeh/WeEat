@@ -1,5 +1,37 @@
-// Create object container to export functions using module.exports
-let functions = {};
+/*
+ * Testing Trouble Shooting
+ * 
+ * 
+ * When require(login) is used in the test file, any code not in a 
+ * function is automatically executed. This creates errors for testing
+ * because references to document and window do not exist.
+ * 
+ * Possibly need to figure out how to create mock browser instance for testing.
+ *
+ *
+
+var firebase = require('firebase');
+// Your web app's Firebase configuration
+var firebaseConfig = {
+apiKey: "AIzaSyAlbF49-DzXUZCz_kpdj2lk4gYJSHSi71w",
+authDomain: "weeat-c73e4.firebaseapp.com",
+databaseURL: "https://weeat-c73e4.firebaseio.com",
+projectId: "weeat-c73e4",
+storageBucket: "weeat-c73e4.appspot.com",
+messagingSenderId: "17474082925",
+appId: "1:17474082925:web:2ca69241a8edaea7"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
+// Stub
+exports.addThreeNumbers = function (a, b, c) {
+    return 0;
+}
+*/
+
 
 firebase.auth().onAuthStateChanged(function(user) {
     displayMapAndPins();
@@ -43,6 +75,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 });
 
+
 // Global Map variable
 mapboxgl.accessToken = 'pk.eyJ1IjoiamJsYW5jb20iLCJhIjoiY2p1YWs5d2ZhMDNsNTQzcnY3anV2bWY3YiJ9.Ow2vCIFfOpsauOfDPJYKGw';
 
@@ -54,6 +87,7 @@ var map = new mapboxgl.Map({
 });
 
 // End of Global Map Variable
+
 
 
 // Login function
@@ -170,4 +204,3 @@ function closePinModal(){
     document.getElementById("sponsor").value = '';
 }
 
-module.export.loginFunctions = functions;
